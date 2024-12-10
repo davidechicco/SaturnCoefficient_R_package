@@ -15,6 +15,6 @@ Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 7.3.1
 NeedsCompilation: no
-Packaged: 2024-12-10 11:13:42 UTC; davide
+Packaged: 2024-12-10 11:23:03 UTC; davide
 Author: Davide Chicco [aut, cre] (<https://orcid.org/0000-0001-9655-7142>)
 Maintainer: Davide Chicco <davidechicco@davidechicco.it>

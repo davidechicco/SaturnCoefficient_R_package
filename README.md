@@ -35,9 +35,10 @@ An example on a random matrix:
     these_nearest_neighbors <- 15
     this_min_dist <- 0.05
 
-    list.of.packages <- c("umap")
+    list.of.packages <- c("pacman")
     new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
     if(length(new.packages)) install.packages(new.packages, repos='http://cran.us.r-project.org')
+    p_load("umap", "SaturnCoefficient")
 
     custom.settings <- umap::umap.defaults
     custom.settings$"n_neighbors" <- these_nearest_neighbors

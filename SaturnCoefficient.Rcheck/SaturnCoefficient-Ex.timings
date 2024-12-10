@@ -1,0 +1,5 @@
+name	user	system	elapsed
+Saturn_coefficient	0.487	0.048	0.499	
+continuity_score	0.627	0.296	0.571	
+three_metrics	0.574	0.235	0.521	
+trustworthiness_score	0.557	0.060	0.548	

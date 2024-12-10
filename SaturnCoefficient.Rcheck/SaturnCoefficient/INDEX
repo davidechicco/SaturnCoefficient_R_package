@@ -1,0 +1,11 @@
+Saturn_coefficient      Function that calculates the Saturn coefficient
+                        to quantify the quality of a UMAP
+                        dimensionality reduction
+continuity_score        Function that calculates the continuity score
+                        of a UMAP dimensionality reduction
+three_metrics           Function that calculates the Saturn
+                        coefficient, trustworthiness score, and the
+                        continuity score of a UMAP dimensionality
+                        reduction
+trustworthiness_score   Function that calculates the trustworthiness
+                        score of a UMAP dimensionality reduction

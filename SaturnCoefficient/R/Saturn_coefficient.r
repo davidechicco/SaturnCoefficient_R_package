@@ -4,7 +4,7 @@
 #' @param umap_output_layout output matrix of UMAP applied to original_matrix
 #' @param VERBOSE prints some intermediate message to standard output or not
 #' @export
-#' @import dplyr MatrixCorrelation sdmpredictors stats umap
+#' @import dplyr MatrixCorrelation qpdf sdmpredictors stats umap
 #' @return a real value containing the Saturn coefficient
 #' @examples
 #'
@@ -12,16 +12,18 @@
 #' this_ncols <- 100
 #' this_min <- 0
 #' this_max <- 10000
-#' noise_random_matrix <- matrix(runif(n = this_nrows * this_ncols, min = this_min, max = this_max), nrow = this_nrows)
+#' noise_random_matrix <- matrix(runif(n = this_nrows * this_ncols,
+#'      min = this_min, max = this_max), nrow = this_nrows)
 #' input_matrix <- as.matrix(noise_random_matrix)
 #' these_nearest_neighbors <- 15
 #' this_min_dist <- 0.05
 #'
-#' custom.settings <- umap.defaults
+#' library("umap")
+#' custom.settings <- umap::umap.defaults
 #' custom.settings$"n_neighbors" <- these_nearest_neighbors
 #' custom.settings$"min_dist" <- this_min_dist
 #'
-#' x_umap <- umap(input_matrix, config=custom.settings)
+#' x_umap <- umap::umap(input_matrix, config=custom.settings)
 #'
 #' this_verbose <- FALSE
 #' thisSaturn <- Saturn_coefficient(input_matrix, x_umap$"layout",  this_verbose)
@@ -36,7 +38,7 @@ Saturn_coefficient <- function(original_matrix, umap_output_layout, VERBOSE) {
         umap_output_layout_dist <- dist(umap_output_layout %>% as.matrix())
 
         # we compute the Adjusted RV coefficient
-        Saturn <- RVadjMaye(original_matrix_norm_dist, umap_output_layout_dist, center = TRUE)
+        Saturn <- MatrixCorrelation::RVadjMaye(original_matrix_norm_dist, umap_output_layout_dist, center = TRUE)
 
         if(VERBOSE) cat("Saturn score = ", Saturn, "\n", sep ="")
 
@@ -51,7 +53,7 @@ Saturn_coefficient <- function(original_matrix, umap_output_layout, VERBOSE) {
 #' @param umap_output_layout output matrix of UMAP applied to original_matrix
 #' @param VERBOSE prints some intermediate message to standard output or not
 #' @export
-#' @import dplyr MatrixCorrelation sdmpredictors stats umap
+#' @import dplyr MatrixCorrelation qpdf sdmpredictors stats umap
 #' @return a real value containing the trustworthiness score
 #' @examples
 #'
@@ -59,12 +61,14 @@ Saturn_coefficient <- function(original_matrix, umap_output_layout, VERBOSE) {
 #' this_ncols <- 100
 #' this_min <- 0
 #' this_max <- 10000
-#' noise_random_matrix <- matrix(runif(n = this_nrows * this_ncols, min = this_min, max = this_max), nrow = this_nrows)
+#' noise_random_matrix <- matrix(runif(n = this_nrows * this_ncols,
+#'      min = this_min, max = this_max), nrow = this_nrows)
 #' input_matrix <- as.matrix(noise_random_matrix)
 #' these_nearest_neighbors <- 15
 #' this_min_dist <- 0.05
 #'
-#' custom.settings <- umap.defaults
+#' library("umap")
+#' custom.settings <- umap::umap.defaults
 #' custom.settings$"n_neighbors" <- these_nearest_neighbors
 #' custom.settings$"min_dist" <- this_min_dist
 #'
@@ -75,7 +79,7 @@ Saturn_coefficient <- function(original_matrix, umap_output_layout, VERBOSE) {
 #' cat("trustworthiness = ", thisTW, "\n", sep="")
 trustworthiness_score <- function(original_matrix, umap_output_layout, VERBOSE) {
 
-        ContTrustMeasureOutput <- ContTrustMeasure(original_matrix, umap_output_layout, ncol(original_matrix))%>% as.data.frame()
+        ContTrustMeasureOutput <- ProjectionBasedClustering::ContTrustMeasure(original_matrix, umap_output_layout, ncol(original_matrix))%>% as.data.frame()
         colnames(ContTrustMeasureOutput) <- c("neighboorhoodSize", "worstCaseTW", "aveTW", "bestCaseTW", "worstCaseCon", "aveCon", "bestCaseCon")
 
         if(VERBOSE) cat("\n == trustworthiness == \n")
@@ -91,7 +95,7 @@ trustworthiness_score <- function(original_matrix, umap_output_layout, VERBOSE) 
 #' @param umap_output_layout output matrix of UMAP applied to original_matrix
 #' @param VERBOSE prints some intermediate message to standard output or not
 #' @export
-#' @import dplyr MatrixCorrelation sdmpredictors stats umap
+#' @import dplyr MatrixCorrelation qpdf sdmpredictors stats umap
 #' @return a real value containing the continuity score
 #' @examples
 #'
@@ -99,23 +103,25 @@ trustworthiness_score <- function(original_matrix, umap_output_layout, VERBOSE) 
 #' this_ncols <- 100
 #' this_min <- 0
 #' this_max <- 10000
-#' noise_random_matrix <- matrix(runif(n = this_nrows * this_ncols, min = this_min, max = this_max), nrow = this_nrows)
+#' noise_random_matrix <- matrix(runif(n = this_nrows * this_ncols,
+#'      min = this_min, max = this_max), nrow = this_nrows)
 #' input_matrix <- as.matrix(noise_random_matrix)
 #' these_nearest_neighbors <- 15
 #' this_min_dist <- 0.05
 #'
-#' custom.settings <- umap.defaults
+#' library("umap")
+#' custom.settings <- umap::umap.defaults
 #' custom.settings$"n_neighbors" <- these_nearest_neighbors
 #' custom.settings$"min_dist" <- this_min_dist
 #'
-#' x_umap <- umap(input_matrix, config=custom.settings)
+#' x_umap <- umap::umap(input_matrix, config=custom.settings)
 #'
 #' this_verbose <- FALSE
 #' thisCon <- continuity_score(input_matrix, x_umap$"layout",  this_verbose)
 #' cat("continuity = ", thisCon, "\n", sep="")
 continuity_score <- function(original_matrix, umap_output_layout, VERBOSE) {
 
-        ContTrustMeasureOutput <- ContTrustMeasure(original_matrix, umap_output_layout, ncol(original_matrix))%>% as.data.frame()
+        ContTrustMeasureOutput <- ProjectionBasedClustering::ContTrustMeasure(original_matrix, umap_output_layout, ncol(original_matrix))%>% as.data.frame()
         colnames(ContTrustMeasureOutput) <- c("neighboorhoodSize", "worstCaseTW", "aveTW", "bestCaseTW", "worstCaseCon", "aveCon", "bestCaseCon")
 
         if(VERBOSE) cat("\n == continuity == \n")
@@ -131,7 +137,7 @@ continuity_score <- function(original_matrix, umap_output_layout, VERBOSE) {
 #' @param umap_output_layout output matrix of UMAP applied to original_matrix
 #' @param VERBOSE prints some intermediate message to standard output or not
 #' @export
-#' @import dplyr MatrixCorrelation sdmpredictors stats umap
+#' @import dplyr MatrixCorrelation qpdf sdmpredictors stats umap
 #' @return a dataframe containing the Saturn coefficient, the trustworthiness score, and the continuity score
 #' @examples
 #'
@@ -139,16 +145,18 @@ continuity_score <- function(original_matrix, umap_output_layout, VERBOSE) {
 #' this_ncols <- 100
 #' this_min <- 0
 #' this_max <- 10000
-#' noise_random_matrix <- matrix(runif(n = this_nrows * this_ncols, min = this_min, max = this_max), nrow = this_nrows)
+#' noise_random_matrix <- matrix(runif(n = this_nrows * this_ncols,
+#'      min = this_min, max = this_max), nrow = this_nrows)
 #' input_matrix <- as.matrix(noise_random_matrix)
 #' these_nearest_neighbors <- 15
 #' this_min_dist <- 0.05
 #'
-#' custom.settings <- umap.defaults
+#' library("umap")
+#' custom.settings <- umap::umap.defaults
 #' custom.settings$"n_neighbors" <- these_nearest_neighbors
 #' custom.settings$"min_dist" <- this_min_dist
 #'
-#' x_umap <- umap(input_matrix, config=custom.settings)
+#' x_umap <- umap::umap(input_matrix, config=custom.settings)
 #'
 #' this_verbose <- FALSE
 #' theseThreeMetrics <- three_metrics(input_matrix, x_umap$"layout",  this_verbose)

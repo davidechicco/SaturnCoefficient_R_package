@@ -18,3 +18,4 @@ NeedsCompilation: no
 Packaged: 2024-12-10 11:13:42 UTC; davide
 Author: Davide Chicco [aut, cre] (<https://orcid.org/0000-0001-9655-7142>)
 Maintainer: Davide Chicco <davidechicco@davidechicco.it>
+Built: R 4.3.1; ; 2024-12-10 11:13:51 UTC; unix

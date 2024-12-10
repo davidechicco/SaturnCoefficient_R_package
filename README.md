@@ -15,6 +15,7 @@ You can install the `easyDifferentialGeneCoexpression` package and its dependenc
 
     R
     install.packages("pacman", repos='http://cran.us.r-project.org')
+    library("pacman")
     p_load("SaturnCoefficient")
 
 ## Execution instructions ##

@@ -1,0 +1,6 @@
+exportPattern( "." )
+importFrom("dplyr","%>%")
+importFrom("MatrixCorrelation", "RVadjMaye")
+importFrom("sdmpredictors", "ContTrustMeasure")
+importFrom("stats", "dist")
+importFrom("umap", "umap")

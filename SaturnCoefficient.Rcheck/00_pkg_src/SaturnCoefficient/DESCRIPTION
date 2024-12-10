@@ -1,0 +1,19 @@
+Encoding: UTF-8
+Package: SaturnCoefficient
+Title: Statistical Evaluation of a UMAP Dimensionality Reduction
+Version: 1.0
+Authors@R: person("Davide", "Chicco", email = "davidechicco@davidechicco.it", comment = c(ORCID = "0000-0001-9655-7142"),
+                  role = c("aut", "cre"))
+Description: A function that reads an input matrix, its dimensionality reduction produced by UMAP, and evaluates the quality of this dimensionality reduction by producing a real value in the [0; 1] interval. We call this real value Saturn coefficient. A higher value means better dimensionality reduction; a lower value means worse dimensionality reduction.
+BugReports: https://github.com/davidechicco/SaturnCoefficient/issues
+Depends: R (>= 4.3.1)
+License: GPL-3
+URL: https://github.com/davidechicco/SaturnCoefficient
+Imports: dplyr, MatrixCorrelation, sdmpredictors, stats, umap
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 7.1.2
+NeedsCompilation: no
+Packaged: 2024-12-10 10:33:18 UTC; davide
+Author: Davide Chicco [aut, cre] (<https://orcid.org/0000-0001-9655-7142>)
+Maintainer: Davide Chicco <davidechicco@davidechicco.it>

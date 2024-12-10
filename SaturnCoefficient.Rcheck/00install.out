@@ -1,0 +1,8 @@
+* installing *source* package ‘SaturnCoefficient’ ...
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+Error: object ‘ContTrustMeasure’ is not exported by 'namespace:sdmpredictors'
+Execution halted
+ERROR: lazy loading failed for package ‘SaturnCoefficient’
+* removing ‘/home/davide/my_projects/SaturnCoefficient_package/SaturnCoefficient.Rcheck/SaturnCoefficient’

@@ -1,0 +1,41 @@
+* using log directory ‘/home/davide/my_projects/SaturnCoefficient_package/SaturnCoefficient.Rcheck’
+* using R version 4.3.1 (2023-06-16)
+* using platform: x86_64-conda-linux-gnu (64-bit)
+* R was compiled by
+    x86_64-conda-linux-gnu-cc (Anaconda gcc) 11.2.0
+    GNU Fortran (Anaconda gcc) 11.2.0
+* running under: Ubuntu 22.04.5 LTS
+* using session charset: UTF-8
+* using option ‘--as-cran’
+* checking for file ‘SaturnCoefficient/DESCRIPTION’ ... OK
+* this is package ‘SaturnCoefficient’ version ‘1.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Davide Chicco <davidechicco@davidechicco.it>’
+
+New submission
+
+Package has a VignetteBuilder field but no prebuilt vignette index.
+
+Found the following (possibly) invalid URLs:
+  URL: https://github.com/davidechicco/SaturnCoefficient
+    From: DESCRIPTION
+    Status: 404
+    Message: Not Found
+  URL: https://github.com/davidechicco/SaturnCoefficient/issues
+    From: DESCRIPTION
+    Status: 404
+    Message: Not Found
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘SaturnCoefficient’ can be installed ... ERROR
+Installation failed.
+See ‘/home/davide/my_projects/SaturnCoefficient_package/SaturnCoefficient.Rcheck/00install.out’ for details.
+* DONE
+Status: 1 ERROR, 1 NOTE

@@ -26,6 +26,11 @@ The last parameter allows you to decide if you want the function to print messag
 ## An example ##
 An example on a random matrix:
 
+    list.of.packages <- c("pacman")
+    new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+    if(length(new.packages)) install.packages(new.packages, repos='http://cran.us.r-project.org')
+    p_load("umap", "SaturnCoefficient")
+
     this_nrows <- 200
     this_ncols <- 100
     this_min <- 0
@@ -34,11 +39,6 @@ An example on a random matrix:
     input_matrix <- as.matrix(noise_random_matrix)
     these_nearest_neighbors <- 15
     this_min_dist <- 0.05
-
-    list.of.packages <- c("pacman")
-    new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-    if(length(new.packages)) install.packages(new.packages, repos='http://cran.us.r-project.org')
-    p_load("umap", "SaturnCoefficient")
 
     custom.settings <- umap::umap.defaults
     custom.settings$"n_neighbors" <- these_nearest_neighbors

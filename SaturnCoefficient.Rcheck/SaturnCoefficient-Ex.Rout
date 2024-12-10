@@ -33,6 +33,8 @@ Type 'q()' to quit R.
 > 
 > ### * </HEADER>
 > library('SaturnCoefficient')
+Warning: replacing previous import ‘dplyr::lag’ by ‘stats::lag’ when loading ‘SaturnCoefficient’
+Warning: replacing previous import ‘dplyr::filter’ by ‘stats::filter’ when loading ‘SaturnCoefficient’
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
@@ -218,7 +220,7 @@ detaching ‘package:umap’
 
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.442 2.454 4.119 0 0 
+Time elapsed:  7.455 2.34 7.167 0 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -58,6 +58,47 @@ cat("Saturn coefficient = ", thisSaturn, "\n", sep="")
 base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
 base::cat("Saturn_coefficient", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
+nameEx("calculatesSaturnContinuityTrustworthiness")
+### * calculatesSaturnContinuityTrustworthiness
+
+flush(stderr()); flush(stdout())
+
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+### Name: calculatesSaturnContinuityTrustworthiness
+### Title: Function that calculates the Saturn coefficient, trustworthiness
+###   score, and the continuity score of a UMAP dimensionality reduction
+### Aliases: calculatesSaturnContinuityTrustworthiness
+
+### ** Examples
+
+
+this_nrows <- 200
+this_ncols <- 100
+this_min <- 0
+this_max <- 10000
+noise_random_matrix <- matrix(runif(n = this_nrows * this_ncols,
+     min = this_min, max = this_max), nrow = this_nrows)
+input_matrix <- as.matrix(noise_random_matrix)
+these_nearest_neighbors <- 15
+this_min_dist <- 0.05
+
+library("umap")
+custom.settings <- umap::umap.defaults
+custom.settings$"n_neighbors" <- these_nearest_neighbors
+custom.settings$"min_dist" <- this_min_dist
+
+x_umap <- umap::umap(input_matrix, config=custom.settings)
+
+this_verbose <- FALSE
+theseThreeMetrics <- calculatesSaturnContinuityTrustworthiness(input_matrix,
+     x_umap$"layout",  this_verbose)
+print(theseThreeMetrics)
+
+
+
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("calculatesSaturnContinuityTrustworthiness", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+cleanEx()
 nameEx("continuity_score")
 ### * continuity_score
 
@@ -97,46 +138,6 @@ cat("continuity = ", thisCon, "\n", sep="")
 
 base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
 base::cat("continuity_score", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
-cleanEx()
-nameEx("three_metrics")
-### * three_metrics
-
-flush(stderr()); flush(stdout())
-
-base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-### Name: three_metrics
-### Title: Function that calculates the Saturn coefficient, trustworthiness
-###   score, and the continuity score of a UMAP dimensionality reduction
-### Aliases: three_metrics
-
-### ** Examples
-
-
-this_nrows <- 200
-this_ncols <- 100
-this_min <- 0
-this_max <- 10000
-noise_random_matrix <- matrix(runif(n = this_nrows * this_ncols,
-     min = this_min, max = this_max), nrow = this_nrows)
-input_matrix <- as.matrix(noise_random_matrix)
-these_nearest_neighbors <- 15
-this_min_dist <- 0.05
-
-library("umap")
-custom.settings <- umap::umap.defaults
-custom.settings$"n_neighbors" <- these_nearest_neighbors
-custom.settings$"min_dist" <- this_min_dist
-
-x_umap <- umap::umap(input_matrix, config=custom.settings)
-
-this_verbose <- FALSE
-theseThreeMetrics <- three_metrics(input_matrix, x_umap$"layout",  this_verbose)
-print(theseThreeMetrics)
-
-
-
-base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
-base::cat("three_metrics", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("trustworthiness_score")
 ### * trustworthiness_score

@@ -4,7 +4,7 @@
 #' @param umap_output_layout output matrix of UMAP applied to original_matrix
 #' @param VERBOSE prints some intermediate message to standard output or not
 #' @export
-#' @import dplyr MatrixCorrelation qpdf sdmpredictors stats umap
+#' @import MatrixCorrelation stats umap
 #' @return a real value containing the Saturn coefficient
 #' @examples
 #'
@@ -34,8 +34,8 @@ Saturn_coefficient <- function(original_matrix, umap_output_layout, VERBOSE) {
         original_matrix_norm <- original_matrix / max(original_matrix) ## to double check
 
         # we compute the distance matrix of the input matrix and the distance matrix of the output matrix
-        original_matrix_norm_dist <- dist(original_matrix_norm %>% as.matrix())
-        umap_output_layout_dist <- dist(umap_output_layout %>% as.matrix())
+        original_matrix_norm_dist <- stats::dist(as.matrix(original_matrix_norm))
+        umap_output_layout_dist <- stats::dist(as.matrix(umap_output_layout))
 
         # we compute the Adjusted RV coefficient
         Saturn <- MatrixCorrelation::RVadjMaye(original_matrix_norm_dist, umap_output_layout_dist, center = TRUE)
@@ -53,7 +53,7 @@ Saturn_coefficient <- function(original_matrix, umap_output_layout, VERBOSE) {
 #' @param umap_output_layout output matrix of UMAP applied to original_matrix
 #' @param VERBOSE prints some intermediate message to standard output or not
 #' @export
-#' @import dplyr MatrixCorrelation qpdf sdmpredictors stats umap
+#' @import ProjectionBasedClustering stats umap
 #' @return a real value containing the trustworthiness score
 #' @examples
 #'
@@ -79,12 +79,12 @@ Saturn_coefficient <- function(original_matrix, umap_output_layout, VERBOSE) {
 #' cat("trustworthiness = ", thisTW, "\n", sep="")
 trustworthiness_score <- function(original_matrix, umap_output_layout, VERBOSE) {
 
-        ContTrustMeasureOutput <- ProjectionBasedClustering::ContTrustMeasure(original_matrix, umap_output_layout, ncol(original_matrix))%>% as.data.frame()
+        ContTrustMeasureOutput <- as.data.frame(ProjectionBasedClustering::ContTrustMeasure(original_matrix, umap_output_layout, ncol(original_matrix)))
         colnames(ContTrustMeasureOutput) <- c("neighboorhoodSize", "worstCaseTW", "aveTW", "bestCaseTW", "worstCaseCon", "aveCon", "bestCaseCon")
 
         if(VERBOSE) cat("\n == trustworthiness == \n")
         if(VERBOSE) cat("average trustworthiness for ", ncol(original_matrix), " neighbors = ", sep="")
-        if(VERBOSE) ContTrustMeasureOutput[ncol(original_matrix),]$"aveTW" %>% cat("\n")
+        if(VERBOSE) cat(ContTrustMeasureOutput[ncol(original_matrix),]$"aveTW", "\n", sep="")
 
         return(ContTrustMeasureOutput[ncol(original_matrix),]$"aveTW")
 }
@@ -95,7 +95,7 @@ trustworthiness_score <- function(original_matrix, umap_output_layout, VERBOSE) 
 #' @param umap_output_layout output matrix of UMAP applied to original_matrix
 #' @param VERBOSE prints some intermediate message to standard output or not
 #' @export
-#' @import dplyr MatrixCorrelation qpdf sdmpredictors stats umap
+#' @import ProjectionBasedClustering stats umap
 #' @return a real value containing the continuity score
 #' @examples
 #'
@@ -121,12 +121,12 @@ trustworthiness_score <- function(original_matrix, umap_output_layout, VERBOSE) 
 #' cat("continuity = ", thisCon, "\n", sep="")
 continuity_score <- function(original_matrix, umap_output_layout, VERBOSE) {
 
-        ContTrustMeasureOutput <- ProjectionBasedClustering::ContTrustMeasure(original_matrix, umap_output_layout, ncol(original_matrix))%>% as.data.frame()
+        ContTrustMeasureOutput <- as.data.frame(ProjectionBasedClustering::ContTrustMeasure(original_matrix, umap_output_layout, ncol(original_matrix)))
         colnames(ContTrustMeasureOutput) <- c("neighboorhoodSize", "worstCaseTW", "aveTW", "bestCaseTW", "worstCaseCon", "aveCon", "bestCaseCon")
 
         if(VERBOSE) cat("\n == continuity == \n")
         if(VERBOSE) cat("average continuity for ", ncol(original_matrix), " neighbors = ", sep="")
-        if(VERBOSE) ContTrustMeasureOutput[ncol(original_matrix),]$"aveCon" %>% cat("\n")
+#         if(VERBOSE) cat(ContTrustMeasureOutput[ncol(original_matrix),]$"aveCon", "\n", sep="")
 
         return(ContTrustMeasureOutput[ncol(original_matrix),]$"aveCon")
 }
@@ -137,7 +137,7 @@ continuity_score <- function(original_matrix, umap_output_layout, VERBOSE) {
 #' @param umap_output_layout output matrix of UMAP applied to original_matrix
 #' @param VERBOSE prints some intermediate message to standard output or not
 #' @export
-#' @import dplyr MatrixCorrelation qpdf sdmpredictors stats umap
+#' @import stats umap
 #' @return a dataframe containing the Saturn coefficient, the trustworthiness score, and the continuity score
 #' @examples
 #'
@@ -159,9 +159,10 @@ continuity_score <- function(original_matrix, umap_output_layout, VERBOSE) {
 #' x_umap <- umap::umap(input_matrix, config=custom.settings)
 #'
 #' this_verbose <- FALSE
-#' theseThreeMetrics <- three_metrics(input_matrix, x_umap$"layout",  this_verbose)
+#' theseThreeMetrics <- calculatesSaturnContinuityTrustworthiness(input_matrix,
+#'      x_umap$"layout",  this_verbose)
 #' print(theseThreeMetrics)
-three_metrics <- function(original_matrix, umap_output_layout, VERBOSE) {
+calculatesSaturnContinuityTrustworthiness <- function(original_matrix, umap_output_layout, VERBOSE) {
 
         this_Saturn_score <- Saturn_coefficient(original_matrix, umap_output_layout, VERBOSE)
         this_continuity <- continuity_score(original_matrix, umap_output_layout, VERBOSE)

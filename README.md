@@ -11,7 +11,7 @@ To run `SaturnCoefficient`, you need to have the following programs and packages
 * R (version > 4.0)
 * R packages: `dplyr` `MatrixCorrelation` `qpdf` `sdmpredictors` `stats` `umap`
 
-You can install the `easyDifferentialGeneCoexpression` package and its dependencies from CRAN, and load it, with the following commands typed in the `R` terminal console:
+You can install the `SaturnCoefficient` package and its dependencies from [CRAN](https://doi.org/10.32614/CRAN.package.SaturnCoefficient), and load it, with the following commands typed in the `R` terminal console:
 
     R
     install.packages("pacman", repos='http://cran.us.r-project.org')

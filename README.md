@@ -15,6 +15,9 @@ You can install the `SaturnCoefficient` package and its dependencies from [CRAN]
 
     R
     install.packages("pacman", repos='http://cran.us.r-project.org')
+    list.of.packages <- c("pacman")
+    new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+    if(length(new.packages)) install.packages(new.packages, repos='http://cran.us.r-project.org')
     library("pacman")
     p_load("SaturnCoefficient")
 
@@ -26,9 +29,7 @@ The last parameter allows you to decide if you want the function to print messag
 ## An example ##
 An example on a random matrix:
 
-    list.of.packages <- c("pacman")
-    new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-    if(length(new.packages)) install.packages(new.packages, repos='http://cran.us.r-project.org')
+    library("pacman")
     p_load("umap", "SaturnCoefficient")
 
     this_nrows <- 200

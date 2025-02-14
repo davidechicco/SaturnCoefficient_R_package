@@ -71,7 +71,7 @@ Type 'q()' to quit R.
 > this_verbose <- FALSE
 > thisSaturn <- Saturn_coefficient(input_matrix, x_umap$"layout",  this_verbose)
 > cat("Saturn coefficient = ", thisSaturn, "\n", sep="")
-Saturn coefficient = 0.1502652
+Saturn coefficient = 0.1524282
 > 
 > 
 > 
@@ -117,7 +117,7 @@ detaching ‘package:umap’
 +      x_umap$"layout",  this_verbose)
 > print(theseThreeMetrics)
   Saturn_coefficient trustworthiness continuity
-1          0.1502652       0.4477354  0.4479687
+1          0.1524282       0.4367828  0.4419707
 > 
 > 
 > 
@@ -161,7 +161,7 @@ detaching ‘package:umap’
 > this_verbose <- FALSE
 > thisCon <- continuity_score(input_matrix, x_umap$"layout",  this_verbose)
 > cat("continuity = ", thisCon, "\n", sep="")
-continuity = 0.4477354
+continuity = 0.4367828
 > 
 > 
 > 
@@ -205,7 +205,7 @@ detaching ‘package:umap’
 > this_verbose <- FALSE
 > thisTW <- trustworthiness_score(input_matrix, x_umap$"layout",  this_verbose)
 > cat("trustworthiness = ", thisTW, "\n", sep="")
-trustworthiness = 0.4479687
+trustworthiness = 0.4419707
 > 
 > 
 > 
@@ -219,7 +219,7 @@ detaching ‘package:umap’
 
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.565 2.016 4.352 0 0 
+Time elapsed:  4.209 2.463 3.914 0 0 
 > grDevices::dev.off()
 null device 
           1 

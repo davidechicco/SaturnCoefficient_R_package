@@ -30,12 +30,13 @@
 #' cat("Saturn coefficient = ", thisSaturn, "\n", sep="")
 Saturn_coefficient <- function(original_matrix, umap_output_layout, VERBOSE) {
 
-        # we scale the values into the [0;1] interval
-        original_matrix_norm <- original_matrix / max(original_matrix) ## to double check
+        # we scale the values by column
+        original_matrix_norm <- base::scale(original_matrix)
+        umap_output_layout_norm <- base::scale(umap_output_layout)
 
         # we compute the distance matrix of the input matrix and the distance matrix of the output matrix
         original_matrix_norm_dist <- stats::dist(as.matrix(original_matrix_norm))
-        umap_output_layout_dist <- stats::dist(as.matrix(umap_output_layout))
+        umap_output_layout_dist <- stats::dist(as.matrix(umap_output_layout_norm))
 
         # we compute the Adjusted RV coefficient
         Saturn <- MatrixCorrelation::RVadjMaye(original_matrix_norm_dist, umap_output_layout_dist, center = TRUE)

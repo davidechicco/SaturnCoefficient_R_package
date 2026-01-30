@@ -30,6 +30,11 @@
 #' cat("Saturn coefficient = ", thisSaturn, "\n", sep="")
 Saturn_coefficient <- function(original_matrix, umap_output_layout, VERBOSE) {
 
+        if(nrow(original_matrix) != nrow(umap_output_layout) || is.null(original_matrix) || is.null(umap_output_layout) ) {
+                if(VERBOSE) cat("Different sizes between UMAP input and UMAP output, or one of the two is empty: the function will return null\n", sep ="")
+                return(NULL)
+        }
+
         # we scale the values by column
         original_matrix_norm <- base::scale(original_matrix)
         umap_output_layout_norm <- base::scale(umap_output_layout)
@@ -80,6 +85,11 @@ Saturn_coefficient <- function(original_matrix, umap_output_layout, VERBOSE) {
 #' cat("trustworthiness = ", thisTW, "\n", sep="")
 trustworthiness_score <- function(original_matrix, umap_output_layout, VERBOSE) {
 
+        if(nrow(original_matrix) != nrow(umap_output_layout) || is.null(original_matrix) || is.null(umap_output_layout) ) {
+                if(VERBOSE) cat("Different sizes between UMAP input and UMAP output, or one of the two is empty: the function will return null\n", sep ="")
+                return(NULL)
+        }
+
         ContTrustMeasureOutput <- as.data.frame(ProjectionBasedClustering::ContTrustMeasure(original_matrix, umap_output_layout, ncol(original_matrix)))
         colnames(ContTrustMeasureOutput) <- c("neighboorhoodSize", "worstCaseTW", "aveTW", "bestCaseTW", "worstCaseCon", "aveCon", "bestCaseCon")
 
@@ -121,6 +131,11 @@ trustworthiness_score <- function(original_matrix, umap_output_layout, VERBOSE) 
 #' thisCon <- continuity_score(input_matrix, x_umap$"layout",  this_verbose)
 #' cat("continuity = ", thisCon, "\n", sep="")
 continuity_score <- function(original_matrix, umap_output_layout, VERBOSE) {
+
+        if(nrow(original_matrix) != nrow(umap_output_layout) || is.null(original_matrix) || is.null(umap_output_layout) ) {
+                if(VERBOSE) cat("Different sizes between UMAP input and UMAP output, or one of the two is empty: the function will return null\n", sep ="")
+                return(NULL)
+        }
 
         ContTrustMeasureOutput <- as.data.frame(ProjectionBasedClustering::ContTrustMeasure(original_matrix, umap_output_layout, ncol(original_matrix)))
         colnames(ContTrustMeasureOutput) <- c("neighboorhoodSize", "worstCaseTW", "aveTW", "bestCaseTW", "worstCaseCon", "aveCon", "bestCaseCon")
@@ -164,6 +179,11 @@ continuity_score <- function(original_matrix, umap_output_layout, VERBOSE) {
 #'      x_umap$"layout",  this_verbose)
 #' print(theseThreeMetrics)
 calculatesSaturnContinuityTrustworthiness <- function(original_matrix, umap_output_layout, VERBOSE) {
+
+        if(nrow(original_matrix) != nrow(umap_output_layout) || is.null(original_matrix) || is.null(umap_output_layout) ) {
+                if(VERBOSE) cat("Different sizes between UMAP input and UMAP output, or one of the two is empty: the function will return null\n", sep ="")
+                return(NULL)
+        }
 
         this_Saturn_score <- Saturn_coefficient(original_matrix, umap_output_layout, VERBOSE)
         this_continuity <- continuity_score(original_matrix, umap_output_layout, VERBOSE)

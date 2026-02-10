@@ -4,6 +4,13 @@
 
 R package that computes the Saturn coefficient of a matrix to assess the quality of its UMAP dimensionality reduction.
 
+## Article ##
+
+More information about this package can be found in the following article:
+
+> Davide Chicco, Simone Melzi, Francesca Gasparini and Giuseppe Jurman, ["The advantages of our proposed Saturn coefficient over continuity and trustworthiness for UMAP dimensionality reduction evaluation"](https://doi.org/10.7717/peerj-cs.3424), _PeerJ Computer Science_ 12:e3424. [https://doi.org/10.7717/peerj-cs.3424](https://doi.org/10.7717/peerj-cs.3424)
+
+
 ## Installation ##
 
 To run `SaturnCoefficient`, you need to have the following programs and packages installed in your computer:

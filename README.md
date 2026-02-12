@@ -10,7 +10,7 @@ More information about this package can be found in the following article:
 
 > Davide Chicco, Simone Melzi, Francesca Gasparini and Giuseppe Jurman, ["The advantages of our proposed Saturn coefficient over continuity and trustworthiness for UMAP dimensionality reduction evaluation"](https://doi.org/10.7717/peerj-cs.3424), _PeerJ Computer Science_ 12:e3424, pages 1-34 (2026). [https://doi.org/10.7717/peerj-cs.3424](https://doi.org/10.7717/peerj-cs.3424)
 
-[<img src="paper_screenshot_rounded.png" alt="Article on PeerJ Computer Science" title="Article on PeerJ Computer Science" width="400"/>](https://doi.org/10.7717/peerj-cs.3424)
+[<img src="paper_screenshot_rounded.png" alt="Article on PeerJ Computer Science" title="Article on PeerJ Computer Science" width="600"/>](https://doi.org/10.7717/peerj-cs.3424)
 
 
 ## Installation ##
